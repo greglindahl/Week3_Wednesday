@@ -1,4 +1,5 @@
 # Wednesday, September 30th
+# Greg Lindahl
 
 ##Review
 [Monday's Material](https://github.com/calebatwood/Week3_Monday)
