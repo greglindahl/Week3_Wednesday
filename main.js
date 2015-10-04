@@ -108,21 +108,109 @@ function countChars(word, x) {
 
 countChars('Bubbles', 'b');
 
-// 10. Declare a function called ohZero() that replaces all of the o's in a string with 0's.
-      var string = "Soon you will master functions!";
+function countChars(word, x) {
+	var count = 0;
+	for (i = 0; i < word.length; i++) {
+		if (word.charAt(i) === word.charAt(x)) {
+			count++;
+		}
+	}
+	return count;
+}
 
+countChars('Bubbles', 4);
+
+// 10. Declare a function called ohZero() that replaces all of the o's in a string with 0's.
+var string = "Soon you will master functions!";
+function ohZero(string) {
+	 return stringZero = string.replace(/o/g, '0');
+}
+
+ohZero(string);
 // 11. Write function that translates a sentence into pig latin.
 //     https://en.wikipedia.org/wiki/Pig_Latin
 //     i.e. "look at my cool function" --> "ooklay atyay ymay oolcay unctionfay"
+var stringLatin = "look at my cool function";
+function pigLatin(string) {
+	var pigArray = [];
+	var currentWord = '';
+	var returnString = '';
+	var ending = '';
+	pigArray = string.split('');
+	for (i = 0; i < pigArray.length; i++) {
+		if ( pigArray[i] === ' ') {
+			currentWord += ending;
+			returnString = currentWord;
+			currentWord = '';
+		}
+		if ( currentWord === '' && (pigArray[i] === 'a' || pigArray[i] === 'e' || pigArray[i] === 'i' || pigArray[i] === 'o' || pigArray[i] === 'u')) {
+			currentWord += pigArray[i];
+			ending = 'yay';
+		} else {
+			currentWord += pigArray[i];
+		}
+	} return returnString;
+}
+
+pigLatin(stringLatin);
 
 // 12. Write a function that prints out the entire "99 Bottles of Beer on the Wall" song lyrics.
+function bottleSong(numOfBottles) {
+	var bottles;
+	for (counter = numOfBottles; counter >= 1; counter = counter - 1) 
+	{
+	    if (counter == 1) {
+	        bottles = 'bottle';
+	    } else {
+	        bottles = 'bottles';
+	    }
+	    console.log(counter + " " + bottles + " of beer on the wall.");
+	    if (counter < numOfBottles) {
+	        console.log("");
+	        console.log(counter + " " + bottles + " of beer on the wall.");
+	    }
+	    console.log(counter + " " + bottles + " of beer.");
+	    console.log("Take one down.");
+	    console.log("Pass it around.");
+	    if (counter == 1) {
+	        console.log("No more bottles of beer on the wall.");
+	    }
+	}
+}
+
+bottleSong(99);
 
 // 13. Create a 'Guessing Game'. The game starts by picking a random number.
 //    It then prompts the user to guess the number. If the user's number is lower/higher,
 //    it will prompt the user to enter another guess and tell the user if the guess was
 //    too high or too low. This continues until the correct guess is entered.
 //    When the correct guess is entered the user is given a success message with the correct number.
+var correctGuess = false;
+var randomNumber = Math.floor(Math.random() * 6 ) + 1;
+var guess = prompt('I am thinking of a number between 1 and 6. What is it?');
 
+function randomNumberGame() {
+	if (parseInt(guess) === randomNumber ) {
+	  correctGuess = true;
+	} else if ( parseInt(guess) < randomNumber ) {
+	  var guessMore = prompt('Try again. The number I am thinking of is more than ' + guess);
+	  if (parseInt(guessMore) === randomNumber) {
+	      correctGuess = true;
+	  }
+	} else if ( parseInt(guess) > randomNumber ) {
+	   var guessLess = prompt('Try again. The number I am thinking of is less than ' + guess);
+	  if (parseInt(guessLess) === randomNumber) {
+	      correctGuess = true;
+	  }
+	}
+	if ( correctGuess ) {
+	    console.log('You guessed the number!');
+	} else {
+	    console.log('Sorry. The number was ' + randomNumber + '.');
+	}
+}
+
+randomNumber();
 
 // 14. http://games.usvsth3m.com/javascript-under-pressure/
 //     Have fun with these! Get as far as you can and record your progress and time. We'll try this again in a few weeks!
