@@ -49,7 +49,7 @@ multiply([1, 2, 3, 4]);
 //    that are six characters or longer.
 var words = ["window", "table", "barstool", "glass", "charger", "outlet"];
 function filterSixPlus(words) {
-    return words.filter(w => w.length >= 6);
+    return words.filter(words => words.length >= 6);
 }
 
 console.log(filterSixPlus(words));
@@ -65,7 +65,7 @@ convertTemp();
 // 7. Adding to the code in #2, prompt the user a second time to determine whether they'd like to convert from Fahrenheit to Celsius
 //    or from Celsius to Fahrenheit. To keep it simple, instruct them to use "F to C" or "C to F".
 //    Alert them with an error if they do not follow the rules.
-function convertTemp() {
+function convertTempToCorF() {
 	var getTemp = prompt("What's the temp?");
 	var cOrF = prompt('Would you like C or F?').toUpperCase();
 	
@@ -76,7 +76,7 @@ function convertTemp() {
 	}
 }
 
-convertTemp();
+convertTempToCorF();
 
 // 8. Write a function countBs() that takes a string as its only argument and returns
 //    a number that indicates how many uppercase “B” characters are in the string.
@@ -137,15 +137,20 @@ function pigLatin(string) {
 	var returnString = '';
 	var ending = '';
 	pigArray = string.split('');
+	console.log(pigArray);
 	for (i = 0; i < pigArray.length; i++) {
-		if ( pigArray[i] === ' ') {
-			currentWord += ending;
-			returnString = currentWord;
+		console.log(pigArray[i]);
+		if (pigArray[i] === ' ') {
+			currentWord += ending + 'ay';
+			returnString = currentWord + ' ';
 			currentWord = '';
+			ending = '';
 		}
-		if ( currentWord === '' && (pigArray[i] === 'a' || pigArray[i] === 'e' || pigArray[i] === 'i' || pigArray[i] === 'o' || pigArray[i] === 'u')) {
-			currentWord += pigArray[i];
-			ending = 'yay';
+		if ( currentWord === '' && (pigArray[i] === 'a' || pigArray[i] === 'e' || pigArray[i] === 'i' || pigArray[i] === 'o' || pigArray[i] === 'u') && ending === '') {
+			currentWord += pigArray[i]; 
+			ending = 'y';
+		} else if (currentWord === '' && !(pigArray[i] === 'a' || pigArray[i] === 'e' || pigArray[i] === 'i' || pigArray[i] === 'o' || pigArray[i] === 'u')) {
+			ending += pigArray[i];
 		} else {
 			currentWord += pigArray[i];
 		}
@@ -154,11 +159,35 @@ function pigLatin(string) {
 
 pigLatin(stringLatin);
 
+//Caleb Solution///
+
+// 11. Write function that translates a sentence into pig latin.
+//     https://en.wikipedia.org/wiki/Pig_Latin
+//     i.e. "look at my cool function" --> "ooklay atyay ymay oolcay unctionfay"
+function pigLatinWord(word){
+  if(word.match(/^[aeiouAEIOU]/)){
+    return word + "yay";
+  } else if(word.match(/^[yY]/)){
+    return word.substring(1, word.length) + "yay";
+  } else {
+    return word.substring(1, word.length) + word.substring(0, 1) + "ay";
+  }
+}
+
+
+function pigLatinSentence(sentence){
+  var phrase = "";
+  var words = sentence.split(" ");
+  for(i=0;i<words.length;i++){
+    phrase += pigLatinWord(words[i]) + " ";
+  }
+  return phrase;
+}
+
 // 12. Write a function that prints out the entire "99 Bottles of Beer on the Wall" song lyrics.
 function bottleSong(numOfBottles) {
 	var bottles;
-	for (counter = numOfBottles; counter >= 1; counter = counter - 1) 
-	{
+	for (counter = numOfBottles; counter >= 1; counter--) {
 	    if (counter == 1) {
 	        bottles = 'bottle';
 	    } else {
@@ -185,11 +214,13 @@ bottleSong(99);
 //    it will prompt the user to enter another guess and tell the user if the guess was
 //    too high or too low. This continues until the correct guess is entered.
 //    When the correct guess is entered the user is given a success message with the correct number.
-var correctGuess = false;
-var randomNumber = Math.floor(Math.random() * 6 ) + 1;
-var guess = prompt('I am thinking of a number between 1 and 6. What is it?');
+
 
 function randomNumberGame() {
+	var correctGuess = false;
+	var randomNumber = Math.floor(Math.random() * 6 ) + 1;
+	var guess = prompt('I am thinking of a number between 1 and 6. What is it?');
+
 	if (parseInt(guess) === randomNumber ) {
 	  correctGuess = true;
 	} else if ( parseInt(guess) < randomNumber ) {
@@ -210,7 +241,7 @@ function randomNumberGame() {
 	}
 }
 
-randomNumber();
+randomNumberGame();
 
 // 14. http://games.usvsth3m.com/javascript-under-pressure/
 //     Have fun with these! Get as far as you can and record your progress and time. We'll try this again in a few weeks!
